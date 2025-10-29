@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Warenkorb – Barrierefreier Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-primary text-white py-3 mb-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="h3 mb-0">Barrierefreier Shop</h1>
+      <a href="index.html" class="btn btn-outline-light btn-sm">Zurück zum Shop</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Bestätigung -->
+    <div class="alert alert-success" role="alert">
+      ✅ <strong>Produkt</strong> wurde erfolgreich zum Warenkorb hinzugefügt.
+    </div>
+
+    <!-- Bestellformular -->
+    <form aria-labelledby="checkout-form-title">
+      <h2 id="checkout-form-title" class="mb-4">Liefer- und Zahlungsinformationen</h2>
+
+      <!-- Persönliche Daten -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Name *</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+
+      <div class="row">
+      <div class="col-md-6 mb-3">
+     <label for="strasse" class="form-label">Straße *</label>
+     <input type="text" class="form-control" id="strasse" required>
+     </div>
+
+     <div class="col-md-6 mb-3"> 
+      <label for="hausnummer" class="form-label">Hausnummer *</label>
+  <input type="text" class="form-control" id="hausnummer" required>
+    </div>
+
+    <div class="row">
+  <div class="col-md-6 mb-3">
+    <label for="plz" class="form-label">PLZ *</label>
+    <input type="text" class="form-control" id="plz" required pattern="\d{5}" aria-describedby="plzHelp">
+    <div id="plzHelp" class="form-text">Bitte 5-stellige Postleitzahl eingeben</div>
+  </div>
+
+  <div class="col-md-6 mb-3">
+    <label for="stadt" class="form-label">Stadt *</label>
+    <input type="text" class="form-control" id="stadt" required>
+  </div>
+</div>
+      <div class="mb-3">
+        <label for="email" class="form-label">E-Mail-Adresse *</label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+
+      <!-- Zahlungsmethode -->
+      <fieldset class="mb-4">
+        <legend class="form-label">Zahlungsmethode *</legend>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="zahlung" id="zahlung1" value="kreditkarte" required>
+          <label class="form-check-label" for="zahlung1">Kreditkarte</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="zahlung" id="zahlung2" value="paypal">
+          <label class="form-check-label" for="zahlung2">PayPal</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="zahlung" id="zahlung3" value="lastschrift">
+          <label class="form-check-label" for="zahlung3">Lastschrift</label>
+        </div>
+      </fieldset>
+
+      <!-- Newsletter -->
+      <div class="form-check mb-4">
+        <input class="form-check-input" type="checkbox" id="newsletter">
+        <label class="form-check-label" for="newsletter">
+          Ich möchte Angebote und Informationen per E-Mail erhalten
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-success">Jetzt Bestellung abschließen</button>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center py-4 mt-5">
+    <p class="mb-0">&copy; 2025</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
