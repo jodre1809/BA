@@ -3,16 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Warenkorb – Barrierefreier Shop</title>
+  <title>Warenkorb – Lampenparadies</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Barriere: Fokus unsichtbar (2.4.7) */
+    :focus { outline:none !important; box-shadow:none !important; }
+    /* Barriere: Visuelle Reihenfolge ≠ DOM-Reihenfolge (2.4.3) */
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .links { grid-column:1; }
+    .rechts { grid-column:2; }
+    /* Barriere: Fehler nur durch Farbe (1.4.1, 3.3.1) */
+    .error-only-color { border-color: red !important; }
+  </style>
 </head>
 <body>
   <!-- Header -->
-  <header class="bg-primary text-white py-3 mb-4">
+  <header class="bg-primary text-darkblue py-3 mb-4">
     <div class="container d-flex justify-content-between align-items-center">
-      <h1 class="h3 mb-0">Barrierefreier Shop</h1>
+      <h1 class="h3 mb-0">Lampenparadies</h1>
       <a href="index.html" class="btn btn-outline-light btn-sm">Zurück zum Shop</a>
     </div>
+    <!-- Barriere: Unzureichender Kontrast von Schrift zu Hintergrund (WCAG 1.4.3) -->
+    <style>
+    .text-darkblue {
+    color: #00182e !important;
+   }
+    </style>
   </header>
 
   <main class="container">
@@ -22,59 +38,66 @@
     </div>
 
     <!-- Bestellformular -->
-    <form aria-labelledby="checkout-form-title">
+    <form id="checkout" aria-labelledby="checkout-form-title" novalidate>
       <h2 id="checkout-form-title" class="mb-4">Liefer- und Zahlungsinformationen</h2>
 
-      <!-- Persönliche Daten -->
+      <!-- Barriere: Einige Felder nur mit Placeholder, ohne <label> (3.3.2) -->
       <div class="mb-3">
-        <label for="name" class="form-label">Name *</label>
-        <input type="text" class="form-control" id="name" required>
+        <!-- Label entfernt -->
+        <input type="text" class="form-control" id="name" placeholder="Vorname *" required>
       </div>
 
-      <div class="row">
-      <div class="col-md-6 mb-3">
-     <label for="strasse" class="form-label">Straße *</label>
-     <input type="text" class="form-control" id="strasse" required>
-     </div>
+      <!-- Barriere: Fokusreihenfolge – DOM stellt Zahlung VOR Adresse, visuell aber andersrum per CSS (2.4.3) -->
+      <div class="grid mb-3">
+        <div class="rechts">
+          <!-- Zahlung (DOM zuerst, visuell rechts) -->
+          <fieldset class="mb-4">
+            <legend class="form-label">Zahlungsmethode *</legend>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="zahlung" id="zahlung1" value="kreditkarte" required>
+              <label class="form-check-label" for="zahlung1">Kreditkarte</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="zahlung" id="zahlung2" value="paypal">
+              <label class="form-check-label" for="zahlung2">PayPal</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="zahlung" id="zahlung3" value="lastschrift">
+              <label class="form-check-label" for="zahlung3">Lastschrift</label>
+            </div>
+          </fieldset>
+        </div>
 
-     <div class="col-md-6 mb-3"> 
-      <label for="hausnummer" class="form-label">Hausnummer *</label>
-  <input type="text" class="form-control" id="hausnummer" required>
-    </div>
+        <div class="links">
+          <!-- Adresse (DOM danach, visuell links) -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="strasse-hausnummer" class="form-label">Straße und Hausnummer *</label>
+              <input type="text" class="form-control" id="strasse-hausnummer" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <input type="text" class="form-control" id="strasse-hausnummer2" required>
+            </div>
+          </div>  
 
-    <div class="row">
-  <div class="col-md-6 mb-3">
-    <label for="plz" class="form-label">PLZ *</label>
-    <input type="text" class="form-control" id="plz" required pattern="\d{5}" aria-describedby="plzHelp">
-    <div id="plzHelp" class="form-text">Bitte 5-stellige Postleitzahl eingeben</div>
-  </div>
-
-  <div class="col-md-6 mb-3">
-    <label for="stadt" class="form-label">Stadt *</label>
-    <input type="text" class="form-control" id="stadt" required>
-  </div>
-</div>
-      <div class="mb-3">
-        <label for="email" class="form-label">E-Mail-Adresse *</label>
-        <input type="email" class="form-control" id="email" required>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="plz" class="form-label">PLZ *</label>
+              <input type="text" class="form-control" id="plz" required pattern="\d{5}" aria-describedby="plzHelp">
+              <div id="plzHelp" class="form-text">Bitte 5-stellige Postleitzahl eingeben</div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="stadt" class="form-label">Stadt *</label>
+              <input type="text" class="form-control" id="stadt" required>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Zahlungsmethode -->
-      <fieldset class="mb-4">
-        <legend class="form-label">Zahlungsmethode *</legend>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="zahlung" id="zahlung1" value="kreditkarte" required>
-          <label class="form-check-label" for="zahlung1">Kreditkarte</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="zahlung" id="zahlung2" value="paypal">
-          <label class="form-check-label" for="zahlung2">PayPal</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="zahlung" id="zahlung3" value="lastschrift">
-          <label class="form-check-label" for="zahlung3">Lastschrift</label>
-        </div>
-      </fieldset>
+      <!-- Barriere: E-Mail ohne Label, nur Placeholder (3.3.2) -->
+      <div class="mb-3">
+        <input type="email" class="form-control" id="email" placeholder="E-Mail-Adresse *" required>
+      </div>
 
       <!-- Newsletter -->
       <div class="form-check mb-4">
@@ -84,16 +107,64 @@
         </label>
       </div>
 
+      <!-- Barriere: Absichtlich keine textlichen Fehlermeldungen, nur Farbe (1.4.1, 3.3.1) -->
       <button type="submit" class="btn btn-success">Jetzt Bestellung abschließen</button>
     </form>
   </main>
 
-  <!-- Footer -->
   <footer class="bg-light text-center py-4 mt-5">
     <p class="mb-0">&copy; 2025</p>
   </footer>
 
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  (function(){
+    const form = document.getElementById('checkout');
+
+    function setError(el, hasError){ 
+      if(el){ el.classList.toggle('error-only-color', !!hasError); }
+    }
+
+    function validate(){
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const strassehausnummer = document.getElementById('strasse-hausnummer');
+      const strassehausnummer2 = document.getElementById('strasse-hausnummer2');
+      const plz = document.getElementById('plz');
+      const stadt = document.getElementById('stadt');
+      const zahlungChecked = document.querySelector('input[name="zahlung"]:checked');
+
+      const emailOk = email && /.+@.+\..+/.test(email.value.trim());
+      const plzOk = plz && /^\d{5}$/.test(plz.value.trim());
+      const strassehausnummerOk = strassehausnummer && !/\d/.test(strassehausnummer.value.trim());
+      const strassehausnummer2Ok = strassehausnummer2 && /^\d+$/.test(strassehausnummer2.value.trim());
+
+      // Nur farbliche Fehlerkennzeichnung
+      setError(name, !(name && name.value.trim()));
+      setError(email, !emailOk);
+      setError(strassehausnummer, !strassehausnummerOk);
+      setError(strassehausnummer2, !strassehausnummer2Ok);
+      setError(plz, !plzOk);
+      setError(stadt, !(stadt && stadt.value.trim()));
+
+      // Barriere: nur Farbe für Zahlungsauswahl
+      const zahlungFirst = document.getElementById('zahlung1');
+      if(zahlungFirst){ zahlungFirst.classList.toggle('error-only-color', !zahlungChecked); }
+
+      // wenn ein Feld fehlt -> Fehler
+      return (name.value.trim() && emailOk && strassehausnummerOk && strassehausnummer2Ok && plzOk && stadt.value.trim() && zahlungChecked);
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();              // Browser-Submit blockieren
+      const ok = validate();
+      if(ok){
+        window.location.href = 'success.html'; // nur wenn alles korrekt
+      }
+      // sonst: keine Texte, keine Hinweise → nur rote Rahmen (Barriere bleibt)
+    });
+  })();
+</script>
+
 </body>
 </html>
