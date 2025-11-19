@@ -7,25 +7,56 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <header class="bg-primary text-white py-3 mb-4">
+  <header class="bg-primary text-darkblue py-3 mb-4">
     <div class="container d-flex justify-content-between align-items-center">
-      <h1 class="h3 mb-0">Barrierefreier Shop</h1>
+      <h1 class="h3 mb-0">Lampenparadies</h1>
       <a href="index.html" class="btn btn-outline-light btn-sm">Zurück zum Shop</a>
     </div>
+    <!-- Barriere: Unzureichender Kontrast von Schrift zu Hintergrund (WCAG 1.4.3) -->
+    <style>
+    .text-darkblue {
+    color: #00182e !important;
+   }
+    </style>
   </header>
   <main class="container">
     <div class="row g-4">
-      <div class="col-md-6">
-        <img src="https://placehold.co/400x250/yellow/black?text=Lampe+Akku" class="card-img-top" alt="Kabellose Smart-Lampe mit Akku">
-      </div>
-      <div class="col-md-6">
-        <h2>Smart-Lampe Mobile</h2>
-        <p class="text-muted">Artikelnummer: 1003</p>
+    
+    <div class="col-md-6">
+      <img src="img/Smart-Lampe-Mobile.jpg"
+           alt="Smart-Lampe Mobile"
+           class="img-fluid mb-3">
+     <h2>Smart-Lampe Mobile</h2>
+         <p class="text-muted">Artikelnummer: 1003</p>
         <p>Mit Akku und Tragegriff – mobil nutzbar ohne Steckdose.</p>
-        <p style="color:springgreen">Akkulaufzeit</p>
-        <p class="fw-bold fs-4">34,99 €</p>
-        <a href="checkout.html" class="btn btn-primary" aria-label="Smart-Lampe Mobile in den Warenkorb legen">In den Warenkorb</a>
-      </div>
+
+  <!-- Barriere: geringer Kontrast (1.4.3) -->
+   <ul id="Produktvorteile" aria-labelledby="Produktvorteile">
+       <li style="color:black">3 Jahre Garantie</li>
+       <li style="color:rgb(230, 130, 0)">Energieeffizienz</li>
+       <li style="color:black">Dimmbar in 5 Stufen</li>
+       <li style="color:black">CRI: 80</li>
+    </ul>
+
+  <!-- Barriere: Preis ausschließlich als Bild, alt leer (1.4.5, 1.1.1) -->
+  <img src="https://placehold.co/160x48/ffffff/000000?text=34,99+%E2%82%AC" alt="Preis" class="mb-3">
+
+  <!-- Barriere: primärer Button nur als Icon ohne zugänglichen Namen (4.1.2, 1.1.1, 2.1.1) -->
+  <button class="btn btn-primary" id="addToCart">
+    <!-- kein aria-label, kein sichtbarer Text -->
+    <svg width="22" height="22" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+      <path d="M7 4h-2l-1 2h2l3.6 7.59-1.35 2.44A1 1 0 0 0 9 18h10v-2H9.42l.93-1.68h6.65a1 1 0 0 0 .9-.55l3.24-6.52A1 1 0 0 0 20.24 6H7.21l-.94-2z"></path>
+    </svg>
+  </button>
+
+  <script>
+    // Barriere: Klick navigiert, aber Button hat keinen zugänglichen Namen/Role-Value-States
+    document.getElementById('addToCart').addEventListener('click', function () {
+      window.location.href = 'checkout.html';
+    });
+  </script>
+</div>
+
     </div>
   </main>
   <footer class="bg-light text-center py-4 mt-5">
