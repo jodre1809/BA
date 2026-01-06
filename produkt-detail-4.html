@@ -7,7 +7,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     :focus { outline: none !important; box-shadow:none !important; } /* 2.4.7 */
-    /* Custom Dropdown als <div> ohne Rolle/Keyboard (2.1.1, 4.1.2) */
     .dropdown { border:1px solid #ccc; padding: .75rem; user-select: none; }
     .dropdown .menu { display:none; border-top:1px solid #eee; margin-top:.5rem; }
     .dropdown.open .menu { display:block; }
@@ -20,7 +19,6 @@
       <h1 class="h3 mb-0">Lampenparadies</h1>
       <a href="index.html" class="btn btn-outline-light btn-sm">Zurück zum Shop</a>
     </div>
-    <!-- Barriere: Unzureichender Kontrast von Schrift zu Hintergrund (WCAG 1.4.3) -->
     <style>
     .text-darkblue {
     color: #00182e !important;
@@ -38,7 +36,6 @@
          <p class="text-muted">Artikelnummer: 1004</p>
         <p>Steuerbarer Farbwechsel per Sprache – für stimmungsvolle Beleuchtung im Alltag.</p>
 
-<!-- Barriere: Custom Dropdown ohne Tastatur & ohne Rolle (2.1.1/4.1.2) -->
       <div class="dropdown mt-3" onclick="this.classList.toggle('open')">
         Menge wählen
         <div class="menu">
@@ -48,7 +45,6 @@
         </div>
       </div>
 
- <!-- Barriere: geringer Kontrast (1.4.3) -->
    <ul id="Produktvorteile" aria-labelledby="Produktvorteile">
        <li style="color:black">3 Jahre Garantie</li>
        <li style="color:rgb(230, 207, 0)">Energieeffizienz</li>
@@ -56,19 +52,15 @@
        <li style="color:black">CRI: 80</li>
     </ul>
 
-  <!-- Barriere: Preis ausschließlich als Bild, alt leer (1.4.5, 1.1.1) -->
   <img src="https://placehold.co/160x48/ffffff/000000?text=36,99+%E2%82%AC" alt="Preis" class="mb-3">
 
-  <!-- Barriere: primärer Button nur als Icon ohne zugänglichen Namen (4.1.2, 1.1.1, 2.1.1) -->
   <button class="btn btn-primary" id="addToCart">
-    <!-- kein aria-label, kein sichtbarer Text -->
     <svg width="22" height="22" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
       <path d="M7 4h-2l-1 2h2l3.6 7.59-1.35 2.44A1 1 0 0 0 9 18h10v-2H9.42l.93-1.68h6.65a1 1 0 0 0 .9-.55l3.24-6.52A1 1 0 0 0 20.24 6H7.21l-.94-2z"></path>
     </svg>
   </button>
 
   <script>
-    // Barriere: Klick navigiert, aber Button hat keinen zugänglichen Namen/Role-Value-States
     document.getElementById('addToCart').addEventListener('click', function () {
       window.location.href = 'checkout.html';
     });
@@ -83,3 +75,4 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
